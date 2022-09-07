@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskblog import app, db, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, SystemForm, StarForm, PlanetForm
-from flaskblog.models import User, System, Star, Planet
+from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, SystemForm#, StarForm, PlanetForm
+from flaskblog.models import User, System#, Star, Planet
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os
@@ -19,10 +19,6 @@ def home():
 def about():
     return render_template('about.html', title="About us")
 
-@app.route('/systems')
-def systems():
-    return render_template('systems.html', title="Systems Data")
-
 @app.route('/stars')
 def stars():
     return render_template('stars.html', title="Stars Data")
@@ -36,12 +32,16 @@ def planets():
 
 # The following code is intended for creating new
 # systems, updating existing systems data and visiting existing system. 
+@app.route('/systems')
+def systems():
+    return render_template('systems.html', title="Systems Data")
+
 @app.route('/systems/new', methods=['GET', 'POST'])
 @login_required
 def new_system():
     form = SystemForm()
     if form.validate_on_submit():
-        system = System(name=form.name.data, sp_type=form.sp_type.data, author=current_user)
+        system = System(system_name=form.system_name.data, sp_type=form.sp_type.data, author=current_user)
         db.session.add(system)
         db.session.commit()
         flash('A new system has been successfully added!', 'success')
@@ -83,95 +83,95 @@ def delete_system(system_id):
 
 
 
-# The following code is intended for creating new
-# stars, updating existing stars data and visiting existing stars. 
-@app.route('/stars/new', methods=['GET', 'POST'])
-@login_required
-def new_star():
-    form = StarForm()
-    if form.validate_on_submit():
-        star = Star(name=form.name.data, sp_type=form.sp_type.data, author=current_user)
-        db.session.add(star)
-        db.session.commit()
-        flash('A new star has been successfully added!', 'success')
-        return redirect(url_for('stars'))
-    return render_template('new_star.html', title="Add a Star",
-        form=form, legend='Add Star Data')
+# # The following code is intended for creating new
+# # stars, updating existing stars data and visiting existing stars. 
+# @app.route('/stars/new', methods=['GET', 'POST'])
+# @login_required
+# def new_star():
+#     form = StarForm()
+#     if form.validate_on_submit():
+#         star = Star(name=form.name.data, sp_type=form.sp_type.data, author=current_user)
+#         db.session.add(star)
+#         db.session.commit()
+#         flash('A new star has been successfully added!', 'success')
+#         return redirect(url_for('stars'))
+#     return render_template('new_star.html', title="Add a Star",
+#         form=form, legend='Add Star Data')
 
-@app.route('/stars/<int:star_id>', methods=['GET', 'POST'])
-def star(star_id):
-    star = Star.query.get_or_404(star_id)
-    return render_template('star.html', title=star.star_name, star=star)
+# @app.route('/stars/<int:star_id>', methods=['GET', 'POST'])
+# def star(star_id):
+#     star = Star.query.get_or_404(star_id)
+#     return render_template('star.html', title=star.star_name, star=star)
 
-@app.route('/stars/<int:star_id>/update', methods=['GET', 'POST'])
-@login_required
-def update_star(star_id):
-    star = Star.query.get_or_404(star_id)
-    form = StarForm()
-    if form.validate_on_submit():
-        star.star_name = form.star_name.data
-        star.sp_type = form.sp_type.data
-        db.session.commit()
-        flash('The star data has been successfully updated.', 'success')
-        return redirect(url_for('star', star_id=star.id))
-    elif request.method == 'GET':
-        form.name.data = star.name
-        form.sp_type.data = star.sp_type
-    return render_template('star.html', title="Update Star",
-        form=form, legend="Update Star Data", star=star)
+# @app.route('/stars/<int:star_id>/update', methods=['GET', 'POST'])
+# @login_required
+# def update_star(star_id):
+#     star = Star.query.get_or_404(star_id)
+#     form = StarForm()
+#     if form.validate_on_submit():
+#         star.star_name = form.star_name.data
+#         star.sp_type = form.sp_type.data
+#         db.session.commit()
+#         flash('The star data has been successfully updated.', 'success')
+#         return redirect(url_for('star', star_id=star.id))
+#     elif request.method == 'GET':
+#         form.name.data = star.name
+#         form.sp_type.data = star.sp_type
+#     return render_template('star.html', title="Update Star",
+#         form=form, legend="Update Star Data", star=star)
 
-@app.route('/stars/<int:star_id>/delete', methods=['POST'])
-@login_required
-def delete_star(star_id):
-    star = Star.query.get_or_404(star_id)
-    db.session.delete(star)
-    db.session.commit()
-    flash('The star has been deleted!', 'success')
-    return redirect( url_for('home'))
-
-
+# @app.route('/stars/<int:star_id>/delete', methods=['POST'])
+# @login_required
+# def delete_star(star_id):
+#     star = Star.query.get_or_404(star_id)
+#     db.session.delete(star)
+#     db.session.commit()
+#     flash('The star has been deleted!', 'success')
+#     return redirect( url_for('home'))
 
 
-# The following code is intended for creating new
-# planets, updating existing planets data and visiting existing planets. 
 
-@app.route('/planets/new', methods=['GET', 'POST'])
-@login_required
-def new_planet():
-    form = PlanetForm()
-    if form.validate_on_submit():
-        flash('A new planet has been successfully added!', 'success')
-        return redirect(url_for('planets'))
-    return render_template('new_planet.html', title="Add a Planet", form=form)
 
-@app.route('/planets/<int:planet_id>', methods=['GET', 'POST'])
-def planet(planet_id):
-    planet = Planet.query.get_or_404(planet_id)
-    return render_template('planet.html', title=planet.planet_name, planet=planet)
+# # The following code is intended for creating new
+# # planets, updating existing planets data and visiting existing planets. 
 
-@app.route('/planets/<int:planet_id>/update', methods=['GET', 'POST'])
-@login_required
-def update_planet(planet_id):
-    planet = Planet.query.get_or_404(planet_id)
-    form = PlanetForm()
-    if form.validate_on_submit():
-        planet.planet_name = form.planet_name.data
-        db.session.commit()
-        flash('The planet data has been successfully updated.', 'success')
-        return redirect(url_for('planet', planet_id=planet.id))
-    elif request.method == 'GET':
-        form.name.data = planet.name
-    return render_template('planet.html', title="Update planet",
-        form=form, legend="Update planet Data", planet=planet)
+# @app.route('/planets/new', methods=['GET', 'POST'])
+# @login_required
+# def new_planet():
+#     form = PlanetForm()
+#     if form.validate_on_submit():
+#         flash('A new planet has been successfully added!', 'success')
+#         return redirect(url_for('planets'))
+#     return render_template('new_planet.html', title="Add a Planet", form=form)
 
-@app.route('/planets/<int:planet_id>/delete', methods=['POST'])
-@login_required
-def delete_planet(planet_id):
-    planet = Planet.query.get_or_404(planet_id)
-    db.session.delete(planet)
-    db.session.commit()
-    flash('The planet has been deleted!', 'success')
-    return redirect( url_for('home'))
+# @app.route('/planets/<int:planet_id>', methods=['GET', 'POST'])
+# def planet(planet_id):
+#     planet = Planet.query.get_or_404(planet_id)
+#     return render_template('planet.html', title=planet.planet_name, planet=planet)
+
+# @app.route('/planets/<int:planet_id>/update', methods=['GET', 'POST'])
+# @login_required
+# def update_planet(planet_id):
+#     planet = Planet.query.get_or_404(planet_id)
+#     form = PlanetForm()
+#     if form.validate_on_submit():
+#         planet.planet_name = form.planet_name.data
+#         db.session.commit()
+#         flash('The planet data has been successfully updated.', 'success')
+#         return redirect(url_for('planet', planet_id=planet.id))
+#     elif request.method == 'GET':
+#         form.name.data = planet.name
+#     return render_template('planet.html', title="Update planet",
+#         form=form, legend="Update planet Data", planet=planet)
+
+# @app.route('/planets/<int:planet_id>/delete', methods=['POST'])
+# @login_required
+# def delete_planet(planet_id):
+#     planet = Planet.query.get_or_404(planet_id)
+#     db.session.delete(planet)
+#     db.session.commit()
+#     flash('The planet has been deleted!', 'success')
+#     return redirect( url_for('home'))
 
 
 
