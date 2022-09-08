@@ -11,58 +11,37 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
     {% if title %}
-        <title> CP catalogue - {{ title }}</title>
+        <title>Flask Blog - {{ title }}</title>
     {% else %}
-        <title> Circumbinary Planet Catalogue </title>
+        <title>Flask Blog</title>
     {% endif %}
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/"> Circumbinary Planet Catalogue </a>
+          <a class="navbar-brand mr-4" href="/">Flask Blog</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <!-- <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a> -->
-              <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
-              <a class="nav-item nav-link" href="{{ url_for('systems') }}">Systems</a>
-              <a class="nav-item nav-link" href="{{ url_for('stars') }}">Stars</a>
-              <a class="nav-item nav-link" href="{{ url_for('planets') }}">Planets</a>
-              <a class="nav-item nav-link" href="#">References</a>
+              <a class="nav-item nav-link" href="/">Home</a>
+              <a class="nav-item nav-link" href="/about">About</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-
-              {% if current_user.is_authenticated %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  User Menu
-                </a>
-              <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ url_for('new_system') }}">Add New System</a>
-              <a class="dropdown-item" href="{{ url_for('account') }}">Add New Star</a>
-              <a class="dropdown-item" href="{{ url_for('account') }}">Add New Planet</a>
-              <a class="dropdown-item" href="{{ url_for('account') }}">My Account</a>
-              <a class="dropdown-item" href="{{ url_for('logout') }}">Log Out</a>
-              </div>
-          </li>
-              {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-              {% endif %}
+              <a class="nav-item nav-link" href="/login">Login</a>
+              <a class="nav-item nav-link" href="/register">Register</a>
             </div>
           </div>
         </div>
       </nav>
     </header>
-    
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
-          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}
               {% for category, message in messages %}
                 <div class="alert alert-{{ category }}">
@@ -70,41 +49,29 @@
                 </div>
               {% endfor %}
             {% endif %}
-          {% endwith %}
+          {% endwith%}
 
-
-
-          {% block content %}
-          {% endblock %}
-
+          {% block content %}{% endblock %}
 
 
         </div>
         <div class="col-md-4">
           <div class="content-section">
-            <p class='text-muted'> Search for systems, stars or planets by name, identifier or other parameters (the search function has not been implemented yet)
+            <h3>Our Sidebar</h3>
+            <p class='text-muted'>You can put any information here you'd like.
               <ul class="list-group">
-                <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              </div>
-              </ul>
-              <div class="content-section">
-
-              <ul class="list-group">
-                <h3>Sidebar </h3>
-                <p class='text-muted'>We can put secondary information here 
-                <li class="list-group-item list-group-item-light"><b>Announcements</b> <br> (1)  <br>  (2) </li>
-                <li class="list-group-item list-group-item-light"><b>Contact us</b> <br> Email: </li>
-                <li class="list-group-item list-group-item-light"> <b>Cite us</b> <br> If you use this work, cite this as:  </li>
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
               </ul>
             </p>
           </div>
         </div>
       </div>
     </main>
-  
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
