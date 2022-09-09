@@ -61,9 +61,7 @@
       </nav>
     </header>
     
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col">
+    <main role="main" class="container-fluid">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
@@ -76,14 +74,16 @@
 
 
 
+
+
           {% block content %}
           <!-- HERE -->
           {% endblock %}
 
 
 
-        </div>
-      </div>
+
+
     </main>
   
     <!-- Optional JavaScript -->

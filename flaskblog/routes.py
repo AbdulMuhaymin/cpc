@@ -85,10 +85,16 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
-@app.route("/systems/<int:system_id>", methods=['GET', 'POST'])
+@app.route("/system/<int:system_id>", methods=['GET', 'POST'])
 def system(system_id):
     system = System.query.get_or_404(system_id)
     return render_template('system.html', title=system.system_name, system=system.__dict__)
+
+
+@app.route("/systems/")
+def systems():
+    systems = System.query.all()
+    return render_template('systems.html', title="System Catalogue", systems=systems)
 
 @app.route("/systems/new", methods=['GET', 'POST'])
 @login_required

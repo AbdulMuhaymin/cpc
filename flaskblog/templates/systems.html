@@ -1,0 +1,38 @@
+{% extends "tb_layout.html" %}
+{% block content %}
+
+        <article class="media content-section">
+          <div class="media-body">
+            <legend class="border-bottom mb-4"> System Data</legend>
+            
+            <table id="example">
+                <thead>
+                  <tr>
+                    <th scope="col"> System </th>
+                    <th scope="col"> Systaaaem </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                    {% for system in systems %}
+                        <tr> 
+                            <td> {{ system.system_name }} </td> 
+                            <td> {{ system.gaia_id }} </td> 
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+              </table>
+
+          </div>
+        </article>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example').DataTable()});
+    </script>
+{% endblock scripts %}
