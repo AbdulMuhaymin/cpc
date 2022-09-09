@@ -1,4 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>About Page</h1>
+
+<h1 class="cover-heading"> About this catalogue </h1>
+<p class="lead">  This catalogue contains data for *** exoplanets in *** planetary systems with a total of *** stellar data. Among these, *** are exoplanets in binary star system and ** are in multiple star systems. We collected and curated these data by ... </p>
+
+<p class="lead"> Learn more about exoplanets in multiple star system from bellow </p>
+
+<figure class="figure">
+    <img src="{{ url_for('static', filename='images/exoplanet_naming.png') }}" class="figure-img img-fluid rounded" alt="Exoplanet naming convention" style="width:400px;height:300px;"> 
+    <figcaption class="figure-caption"> 
+        The naming convention of exoplanets in the context of circumbinary planets (Hessman et al.)
+    </figcaption>
+</figure>
+
+
+<figure class="figure col-md-8">    
+    <img src="{{ url_for('static', filename='images/ps-type.jpg') }}" class="figure-img img-fluid rounded" style="width:200px;height:200px;">
+    <img src="{{ url_for('static', filename='images/t-type.jpg') }}" class="figure-img img-fluid rounded" style="width:200px;height:200px;">
+
+    <figcaption class="figure-caption"> 
+        The different types of circumbinary exoplanet in binary star systems, Schwarz et al. (right).
+    </figcaption>
+</figure>
+
 {% endblock content %}

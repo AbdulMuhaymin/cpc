@@ -1,15 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% for post in posts %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.author }}</a>
-              <small class="text-muted">{{ post.date_posted }}</small>
-            </div>
-            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-          </div>
-        </article>
-    {% endfor %}
+
+    <h1 class="cover-heading"> A catalogue of exoplanets in binary and multiple star systems </h1>
+    <p class="lead">  This catalogue is dedicated to record extrasolar and stellar parameters of exoplanets and their corresponding systems orbitting in multiple/binary star systems. </p>
+
+    <p><a href="{{ url_for('about') }}" class="btn btn-lg btn-outline-info my-2 my-sm-0"> Click here to learn more </a></p>
+    <p><a href="{ url_for('planets') }}" class="btn btn-lg btn-success"> Click here to access the systems parameters </a></p>
+    <p><a href="{ url_for('stars') }}" class="btn btn-lg btn-primary"> Click here to access the stellar parameters </a></p>
+    <p><a href="{ url_for('systems') }}" class="btn btn-lg btn-danger"> Click here to access the planetary parameters </a></p>
+
 {% endblock content %}

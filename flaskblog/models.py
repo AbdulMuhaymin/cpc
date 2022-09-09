@@ -1,6 +1,11 @@
-from flaskblog import db
+from flaskblog import db, login_manager
+from flask_login import UserMixin
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -15,72 +20,72 @@ class User(db.Model):
 class System(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
-    system_name = db.Column(db.String(100), nullable=False)
-    gaia_id = db.Column(db.String(100), unique=True)
+    system_name = db.Column(db.String, nullable=False)
+    gaia_id = db.Column(db.String)
 
-    sp_type = db.Column(db.String(100))
-    sp_type_ref = db.Column(db.Text)
+    sp_type = db.Column(db.String)
+    sp_type_ref = db.Column(db.String)
 
-    ra = db.Column(db.Float(60))
-    ra_error_upper = db.Column(db.Float(60))
-    ra_error_lower = db.Column(db.Float(60))
-    dec = db.Column(db.Float(60))
-    dec_error_upper = db.Column(db.Float(60))
-    dec_error_lower = db.Column(db.Float(60))
+    ra = db.Column(db.String)
+    ra_error_upper = db.Column(db.String)
+    ra_error_lower = db.Column(db.String)
+    dec = db.Column(db.String)
+    dec_error_upper = db.Column(db.String)
+    dec_error_lower = db.Column(db.String)
     ra_dec_ref = db.Column(db.Text)
 
-    parallax = db.Column(db.Float(60))
-    parallax_error = db.Column(db.Float(60))
-    distance = db.Column(db.Float(60))
-    distance_error_upper = db.Column(db.Float(60))
-    distance_error_lower = db.Column(db.Float(60))
+    parallax = db.Column(db.String)
+    parallax_error = db.Column(db.String)
+    distance = db.Column(db.String)
+    distance_error_upper = db.Column(db.String)
+    distance_error_lower = db.Column(db.String)
     distance_ref = db.Column(db.Text)
 
-    distance_gspphot = db.Column(db.Float(60))
-    distance_gspphot_upperper = db.Column(db.Float(60))
-    distance_gspphot_lower = db.Column(db.Float(60))
+    distance_gspphot = db.Column(db.String)
+    distance_gspphot_upper = db.Column(db.String)
+    distance_gspphot_lower = db.Column(db.String)
 
-    pmra = db.Column(db.Float(60))
-    pmra_error_upper = db.Column(db.Float(60))
-    pmra_error_lower = db.Column(db.Float(60))
-    pmdec = db.Column(db.Float(60))
-    pmdec_error_upper = db.Column(db.Float(60))
-    pmdec_error_lower = db.Column(db.Float(60))
-    pm = db.Column(db.Float(60))
+    pmra = db.Column(db.String)
+    pmra_error_upper = db.Column(db.String)
+    pmra_error_lower = db.Column(db.String)
+    pmdec = db.Column(db.String)
+    pmdec_error_upper = db.Column(db.String)
+    pmdec_error_lower = db.Column(db.String)
+    pm = db.Column(db.String)
     pm_ref = db.Column(db.Text)
 
-    radial_velocity = db.Column(db.Float(60))
-    radial_velocity_upper = db.Column(db.Float(60))
-    radial_velocity_lower = db.Column(db.Float(60))
+    radial_velocity = db.Column(db.String)
+    radial_velocity_upper = db.Column(db.String)
+    radial_velocity_lower = db.Column(db.String)
     radial_velocity_ref = db.Column(db.Text)
 
-    a = db.Column(db.Float(60))
-    a_error_upper = db.Column(db.Float(60))
-    a_error_lower = db.Column(db.Float(60))
+    a = db.Column(db.String)
+    a_error_upper = db.Column(db.String)
+    a_error_lower = db.Column(db.String)
     a_ref = db.Column(db.Text)
 
-    incl = db.Column(db.Float(60))
-    incl_error_upper = db.Column(db.Float(60))
-    incl_error_lower = db.Column(db.Float(60))
+    incl = db.Column(db.String)
+    incl_error_upper = db.Column(db.String)
+    incl_error_lower = db.Column(db.String)
     incl_ref = db.Column(db.Text)
 
-    e = db.Column(db.Float(60))
-    e_error_upper = db.Column(db.Float(60))
-    e_error_lower = db.Column(db.Float(60))
+    e = db.Column(db.String)
+    e_error_upper = db.Column(db.String)
+    e_error_lower = db.Column(db.String)
     e_ref = db.Column(db.Text)
     
-    w = db.Column(db.Float(60))
-    w_error_upper = db.Column(db.Float(60))
-    w_error_lower = db.Column(db.Float(60))
+    w = db.Column(db.String)
+    w_error_upper = db.Column(db.String)
+    w_error_lower = db.Column(db.String)
     w_ref = db.Column(db.Text)
 
-    age = db.Column(db.Float(60))
-    age_error_upper = db.Column(db.Float(60))
-    age_error_lower = db.Column(db.Float(60))
+    age = db.Column(db.String)
+    age_error_upper = db.Column(db.String)
+    age_error_lower = db.Column(db.String)
     age_ref = db.Column(db.Text)
 
-    alt_names = db.Column(db.Text)
-    notes = db.Column(db.Text)
+    alt_names = db.Column(db.String)
+    notes = db.Column(db.String)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
