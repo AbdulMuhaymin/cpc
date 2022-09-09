@@ -18,6 +18,24 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
+@app.route("/stars")
+def stars():
+    return render_template('stars.html', title='About')
+@app.route("/planets")
+def planets():
+    return render_template('planets.html', title='About')
+@app.route("/refs")
+def refs():
+    return render_template('refs.html', title='About')
+@app.route("/stars/new")
+def new_star():
+    return render_template('star_new.html', title='About')
+@app.route("/planets/new")
+def new_planet():
+    return render_template('planet_new.html', title='About')
+
+
+
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -85,10 +103,12 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
-@app.route("/system/<int:system_id>", methods=['GET', 'POST'])
-def system(system_id):
-    system = System.query.get_or_404(system_id)
-    return render_template('system.html', title=system.system_name, system=system.__dict__)
+
+
+
+
+
+
 
 
 @app.route("/systems/")
@@ -107,7 +127,12 @@ def new_system():
         db.session.commit()
         flash('The system entry has been successfully added for ', 'success')
         return redirect(url_for('system', system_id=system.id))
-    return render_template('new_system.html', title="Add a system entry", form=form, legend='Add New System')
+    return render_template('system_new.html', title="Add a system entry", form=form, legend='Add New System')
+
+@app.route("/system/<int:system_id>", methods=['GET', 'POST'])
+def system(system_id):
+    system = System.query.get_or_404(system_id)
+    return render_template('system.html', title=system.system_name, system=system.__dict__)
 
 @app.route("/systems/<int:system_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -119,11 +144,9 @@ def update_system(system_id):
         db.session.commit()
         flash('The system entry has been updated', 'success')
         return redirect(url_for('system', system_id=system.id))
-
     elif request.method == 'GET':
-        form.populate_obj(system)
-        
-    return render_template('new_system.html', title="Update a system entry", form=form, legend='Update System')
+        form.populate_obj(system)  
+    return render_template('system_new.html', title="Update a system entry", form=form, legend='Update System')
 
 @app.route("/systems/<int:system_id>/delete", methods=['POST'])
 @login_required

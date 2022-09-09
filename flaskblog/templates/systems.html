@@ -9,7 +9,7 @@
                 <thead>
                   <tr>
                     <th scope="col"> System </th>
-                    <th scope="col"> Systaaaem </th>
+                    <th scope="col"> link </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -17,7 +17,7 @@
                     {% for system in systems %}
                         <tr> 
                             <td> {{ system.system_name }} </td> 
-                            <td> {{ system.gaia_id }} </td> 
+                            <td> <a href="{{ url_for('system', system_id=system.id) }}"> {{ system.id }} </a> </td> 
                         </tr>
                     {% endfor %}
 
