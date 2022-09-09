@@ -2,7 +2,7 @@
 {% block content %}
 
 
-            <legend class="border-bottom mb-4"> System Data</legend>
+            <legend class="border-bottom mb-4"> Star Data</legend>
             
             <table id="example">
                 <thead>
@@ -13,10 +13,10 @@
                 </thead>
 
                 <tbody>
-                    {% for system in systems %}
+                    {% for star in stars %}
                     <tr> 
-                        <td> {{ system.system_name }} </td> 
-                        <td> <a href="{{ url_for('system', system_id=system.id) }}"> {{ system.id }} </a> </td>
+                        <td> {{ star.star_name }} </td> 
+                        <td> <a href="{{ url_for('system', system_id=system.id) }}"> {{ star.id }} </a> </td>
                     </tr>
                     {% endfor %}
                 </tbody>

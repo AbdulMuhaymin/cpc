@@ -3,16 +3,15 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from flaskblog import app, db, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, SystemForm
-from flaskblog.models import User, System
+from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, SystemForm, StarForm, PlanetForm
+from flaskblog.models import User, System, Star, Planet
 from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route("/")
 @app.route("/home")
 def home():
-    systems = System.query.all()
-    return render_template('home.html', systems=systems)
+    return render_template('home.html')
 
 @app.route("/about")
 def about():
@@ -20,19 +19,27 @@ def about():
 
 @app.route("/stars")
 def stars():
-    return render_template('stars.html', title='About')
+    return render_template('stars.html', title='Stars')
+@app.route("/stars/new", methods=['GET', 'POST'])
+@login_required
+def new_star():
+    form = StarForm()
+    if form.validate_on_submit():
+        star = Star(**{k: v for k, v in form.data.items() if k not in ['csrf_token', 'submit']}, 
+            author=current_user)
+        db.session.add(star)
+        db.session.commit()
+        flash('The star entry has been successfully added for ', 'success')
+        return redirect(url_for('star', star_id=star.id))
+    return render_template('star_new.html', title="Add new Star", form=form, legend='Add New Star')
+
 @app.route("/planets")
 def planets():
-    return render_template('planets.html', title='About')
-@app.route("/refs")
-def refs():
-    return render_template('refs.html', title='About')
-@app.route("/stars/new")
-def new_star():
-    return render_template('star_new.html', title='About')
+    return render_template('planets.html', title='Planets')
 @app.route("/planets/new")
+@login_required
 def new_planet():
-    return render_template('planet_new.html', title='About')
+    return render_template('planet_new.html', title='Add a planet')
 
 
 
@@ -44,7 +51,8 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        # hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_password =form.password.data
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
@@ -59,7 +67,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
+        if user and (user.password==form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))

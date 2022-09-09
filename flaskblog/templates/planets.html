@@ -2,21 +2,21 @@
 {% block content %}
 
 
-            <legend class="border-bottom mb-4"> System Data</legend>
+            <legend class="border-bottom mb-4"> Planet Data</legend>
             
             <table id="example">
                 <thead>
                     <tr>
-                        <th scope="col"> System </th>
+                        <th scope="col"> planet </th>
                         <th scope="col"> link </th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {% for system in systems %}
+                    {% for planet in planets %}
                     <tr> 
-                        <td> {{ system.system_name }} </td> 
-                        <td> <a href="{{ url_for('system', system_id=system.id) }}"> {{ system.id }} </a> </td>
+                        <td> {{ planet.planet_name }} </td> 
+                        <td> <a href="{{ url_for('planet', planet_id=planet.id) }}"> {{ planet.id }} </a> </td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+                <legend class=""> {{ planet.planet_name }}  </legend>
+                {% if current_user.is_authenticated %}
+                    <a class="btn btn-primary mt-1 mb-1" href="{{ url_for('update_planet', planet_id=planet.id) }}"> Update </a>
+                    <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#deleteModal"> Delete </button>
+                {% endif %}
+            </div>
+            
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Planet Parameter </th>
+                    <th scope="col">Value </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                    {% for param, val in planet.items() %}
+                        {% if param not in ['user_id', '_sa_instance_state'] %}
+                        <tr> <td> {{ param }} </td> <td> {{ val }} </td> </tr>
+                        {% endif %}
+                    {% endfor %}
+
+                </tbody>
+              </table>
+
+          </div>
+        </article>
+
+
+        <!-- Modal to prevent accidental deletation -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel"> Do you really want to delete this planet entry? </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Deleting is permanent. If you want to modify the entry, consider <a href="{{ url_for('update_planet', planet_id=planet.id) }}"> Updating </a> instead of deleting.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                  <a class="btn btn-primary" href="{{ url_for('update_planet', planet_id=planet.id) }}"> Update </a>
+                  <form action="{{ url_for('delete_planet', planet_id=planet.id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete!">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+{% endblock content %}
