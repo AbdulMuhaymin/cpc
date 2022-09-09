@@ -16,7 +16,7 @@
                     {% for system in systems %}
                     <tr> 
                         <td> {{ system.system_name }} </td> 
-                        <td> <a href="{{ url_for('system', system_id=system.id) }}"> {{ system.id }} </a> </td>
+                        <td> <a href="{{ url_for('systems.system', system_id=system.id) }}"> {{ system.id }} </a> </td>
                     </tr>
                     {% endfor %}
                 </tbody>

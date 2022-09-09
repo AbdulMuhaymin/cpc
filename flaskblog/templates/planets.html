@@ -16,7 +16,7 @@
                     {% for planet in planets %}
                     <tr> 
                         <td> {{ planet.planet_name }} </td> 
-                        <td> <a href="{{ url_for('planet', planet_id=planet.id) }}"> {{ planet.id }} </a> </td>
+                        <td> <a href="{{ url_for('planets.planet', planet_id=planet.id) }}"> {{ planet.id }} </a> </td>
                     </tr>
                     {% endfor %}
                 </tbody>

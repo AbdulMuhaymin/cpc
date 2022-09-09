@@ -16,7 +16,7 @@
                     {% for star in stars %}
                     <tr> 
                         <td> {{ star.star_name }} </td> 
-                        <td> <a href="{{ url_for('system', system_id=system.id) }}"> {{ star.id }} </a> </td>
+                        <td> <a href="{{ url_for('stars.star', star_id=star.id) }}"> {{ star.id }} </a> </td>
                     </tr>
                     {% endfor %}
                 </tbody>

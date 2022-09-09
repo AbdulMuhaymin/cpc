@@ -4,9 +4,9 @@
     <h1 class="cover-heading"> A catalogue of exoplanets in binary and multiple star systems </h1>
     <p class="lead">  This catalogue is dedicated to record extrasolar and stellar parameters of exoplanets and their corresponding systems orbitting in multiple/binary star systems. </p>
 
-    <p><a href="{{ url_for('about') }}" class="btn btn-lg btn-outline-info my-2 my-sm-0"> Click here to learn more </a></p>
-    <p><a href="{ url_for('planets') }}" class="btn btn-lg btn-success"> Click here to access the systems parameters </a></p>
-    <p><a href="{ url_for('stars') }}" class="btn btn-lg btn-primary"> Click here to access the stellar parameters </a></p>
-    <p><a href="{ url_for('systems') }}" class="btn btn-lg btn-danger"> Click here to access the planetary parameters </a></p>
+    <p><a href="{{ url_for('main.about') }}" class="btn btn-lg btn-outline-info my-2 my-sm-0"> Click here to learn more </a></p>
+    <p><a href="{ url_for('planets.planets') }}" class="btn btn-lg btn-success"> Click here to access the systems parameters </a></p>
+    <p><a href="{ url_for('stars.stars') }}" class="btn btn-lg btn-primary"> Click here to access the stellar parameters </a></p>
+    <p><a href="{ url_for('systems.systems') }}" class="btn btn-lg btn-danger"> Click here to access the planetary parameters </a></p>
 
 {% endblock content %}

@@ -6,7 +6,7 @@
             <div class="article-metadata">
                 <legend class=""> {{ system.system_name }}  </legend>
                 {% if current_user.is_authenticated %}
-                    <a class="btn btn-primary mt-1 mb-1" href="{{ url_for('update_system', system_id=system.id) }}"> Update </a>
+                    <a class="btn btn-primary mt-1 mb-1" href="{{ url_for('systems.update_system', system_id=system.id) }}"> Update </a>
                     <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#deleteModal"> Delete </button>
                 {% endif %}
             </div>
@@ -44,12 +44,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  Deleting is permanent. If you want to modify the entry, consider <a href="{{ url_for('update_system', system_id=system.id) }}"> Updating </a> instead of deleting.
+                  Deleting is permanent. If you want to modify the entry, consider <a href="{{ url_for('systems.update_system', system_id=system.id) }}"> Updating </a> instead of deleting.
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
-                  <a class="btn btn-primary" href="{{ url_for('update_system', system_id=system.id) }}"> Update </a>
-                  <form action="{{ url_for('delete_system', system_id=system.id) }}" method="POST">
+                  <a class="btn btn-primary" href="{{ url_for('systems.update_system', system_id=system.id) }}"> Update </a>
+                  <form action="{{ url_for('systems.delete_system', system_id=system.id) }}" method="POST">
                     <input class="btn btn-danger" type="submit" value="Delete!">
                   </form>
                 </div>
