@@ -179,7 +179,7 @@ class PlanetForm(FlaskForm):
     submit = SubmitField('Submit', validators=[Optional(strip_whitespace=True)])
 
 from flask_login import current_user
-from flaskblog.models import User
+from cpc.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
