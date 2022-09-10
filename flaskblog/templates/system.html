@@ -20,9 +20,14 @@
                 </thead>
                 <tbody>
                   
-                    {% for param, val in system.__dict__ | dictsort  %}
-                        {% if param not in ['user_id', '_sa_instance_state'] %}
-                        <tr> <td> {{ param }} </td> <td> {{ val }} </td> </tr>
+                    {% for field in form %}
+                        {% if field.label.text not in ['Submit', 'CSRF Token'] %}
+
+                        <tr> 
+                          <td> {{ field.label.text }} </td> 
+                          <td> {{ field.data }} </td> 
+                        </tr>
+                        
                         {% endif %}
                     {% endfor %}
 

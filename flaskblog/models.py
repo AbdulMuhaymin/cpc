@@ -12,7 +12,6 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), default='default.png', nullable=False) 
     password = db.Column(db.String(60), nullable = False)
 
-    systems = db.relationship('System', backref='author', lazy=True)
     stars = db.relationship('Star', backref='author', lazy=True)
     planets = db.relationship('Planet', backref='author', lazy=True)
 
@@ -57,8 +56,8 @@ class System(db.Model):
     pm_ref = db.Column(db.Text)
 
     radial_velocity = db.Column(db.Float)
-    radial_velocity_upper = db.Column(db.Float)
-    radial_velocity_lower = db.Column(db.Float)
+    radial_velocity_error_upper = db.Column(db.Float)
+    radial_velocity_error_lower = db.Column(db.Float)
     radial_velocity_ref = db.Column(db.Text)
 
     a = db.Column(db.Float)
@@ -89,10 +88,8 @@ class System(db.Model):
     alt_names = db.Column(db.String)
     notes = db.Column(db.Text)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
     def __repr__(self):
-        return f"System('System: {self.system_name}', ' with Gaia DR3 ID', '{self.gaia_id}')"
+        return f"System - '{self.system_name}')"
 
 class Star(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -137,8 +134,8 @@ class Star(db.Model):
     vsini_ref = db.Column(db.Text)
     
     p_rot= db.Column(db.Float)
-    p_rot_err_upper = db.Column(db.Float)
-    p_rot_err_lower = db.Column(db.Float)
+    p_rot_error_upper = db.Column(db.Float)
+    p_rot_error_lower = db.Column(db.Float)
     p_rot_ref = db.Column(db.Text)
     
     notes = db.Column(db.Text)
@@ -146,7 +143,7 @@ class Star(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"System('This is a star in a multiple star system: {self.star_name}', ' of spectral type', '{self.sp_type}')"
+        return f"System - '{self.star_name}')"
 
 class Planet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -207,5 +204,5 @@ class Planet(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"System('This is an exoplanet in a multiple star system: {self.planet_name}', ' discovered using ', '{self.discovery_method}')"
+        return f"System - '{self.planet_name}')"
 

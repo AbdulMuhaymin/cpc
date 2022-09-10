@@ -7,16 +7,86 @@
             <table id="example">
                 <thead>
                     <tr>
-                        <th scope="col"> System </th>
-                        <th scope="col"> link </th>
+                        {% for field in form %}
+                            {% if field.label.text not in ['Submit', 'CSRF Token'] %}
+                                 
+                                <th scope="col"> {{ field.label.text }} </th> 
+                            
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                 </thead>
 
                 <tbody>
                     {% for system in systems %}
                     <tr> 
-                        <td> {{ system.system_name }} </td> 
-                        <td> <a href="{{ url_for('systems.system', system_id=system.id) }}"> {{ system.id }} </a> </td>
+                        <td> <a href="{{ url_for('systems.system', system_id=system.id) }}"> {{ system.system_name }} </a> </td> 
+                        <td> {{ system.gaia_id }} </td>
+                        <td> {{ system.sp_type }} </td>
+                        <td> {{ system.sp_type_ref }} </td>
+
+                        <td> {{ system.ra }} </td>
+                        <td> {{ system.ra_error_upper }} </td>
+                        <td> {{ system.ra_error_lower }} </td>
+                        <td> {{ system.dec }} </td>
+                        <td> {{ system.dec_error_upper }} </td>
+                        <td> {{ system.dec_error_lower }} </td>
+                        <td> {{ system.ra_dec_ref }} </td>
+
+                        <td> {{ system.parallax }} </td>
+                        <td> {{ system.parallax_error }} </td>
+                        <td> {{ system.distance }} </td>
+                        <td> {{ system.distance_error_upper }} </td>
+                        <td> {{ system.distance_error_lower }} </td>
+                        <td> {{ system.distance_ref }} </td>
+
+                        <td> {{ system.distance_gspphot }} </td>
+                        <td> {{ system.gaidistance_gspphot_uppera_id }} </td>
+                        <td> {{ system.distance_gspphot_lower }} </td>
+
+                        <td> {{ system.gaipmraa_id }} </td>
+                        <td> {{ system.pmra_error_upper }} </td>
+                        <td> {{ system.pmra_error_lower }} </td>
+                        <td> {{ system.pmdec }} </td>
+                        <td> {{ system.pmdec_error_upper }} </td>
+                        <td> {{ system.pmdec_error_lower }} </td>
+                        <td> {{ system.pm }} </td>
+                        <td> {{ system.pm_ref }} </td>
+
+                        <td> {{ system.radial_velocity }} </td>
+                        <td> {{ system.radial_velocity_error_upper }} </td>
+                        <td> {{ system.radial_velocity_error_lower }} </td>
+                        <td> {{ system.radial_velocity_ref }} </td>
+
+                        <td> {{ system.a }} </td>
+                        <td> {{ system.a_error_upper }} </td>
+                        <td> {{ system.a_error_lower }} </td>
+                        <td> {{ system.a_ref }} </td>
+
+                        <td> {{ system.incl }} </td>
+                        <td> {{ system.incl_error_upper }} </td>
+                        <td> {{ system.incl_error_lower }} </td>
+                        <td> {{ system.incl_ref }} </td>
+
+                        <td> {{ system.e }} </td>
+                        <td> {{ system.e_error_upper }} </td>
+                        <td> {{ system.e_error_lower }} </td>
+                        <td> {{ system.e_ref }} </td>
+
+                        <td> {{ system.w }} </td>
+                        <td> {{ system.w_error_upper }} </td>
+                        <td> {{ system.w_error_lower }} </td>
+                        <td> {{ system.w_ref }} </td>
+
+                        <td> {{ system.age }} </td>
+                        <td> {{ system.age_error_upper }} </td>
+                        <td> {{ system.age_error_lower }} </td>
+                        <td> {{ system.age_ref }} </td>
+
+                        <td> {{ system.alt_names }} </td>
+                        <td> {{ system.notes }} </td>
+
+
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -31,8 +101,6 @@
     $(document).ready(function () {
         $('#example').DataTable({
             scrollX: true,
-            scrollY: '400px',
-            scrollCollapse: true,
             fixedHeader: true,
             fixedColumns: true
         });
