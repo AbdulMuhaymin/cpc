@@ -27,7 +27,7 @@ def new_system():
 @systems_bp.route("/system/<int:system_id>", methods=['GET', 'POST'])
 def system(system_id):
     system = System.query.get_or_404(system_id)
-    return render_template('system.html', title=system.system_name, system=system.__dict__)
+    return render_template('system.html', title=system.system_name, system=system)
 
 @systems_bp.route("/systems/<int:system_id>/update", methods=['GET', 'POST'])
 @login_required

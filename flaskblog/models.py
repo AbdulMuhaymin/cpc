@@ -112,8 +112,8 @@ class Star(db.Model):
     radius_ref = db.Column(db.Text)
 
     log_g = db.Column(db.Float)
-    log_g_err_upper = db.Column(db.Float)
-    log_g_err_lower = db.Column(db.Float)
+    log_g_error_upper = db.Column(db.Float)
+    log_g_error_lower = db.Column(db.Float)
     log_g_ref = db.Column(db.Text)
 
     T_eff = db.Column(db.Float)

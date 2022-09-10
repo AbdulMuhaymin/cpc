@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                   
-                    {% for param, val in system.items() %}
+                    {% for param, val in system.__dict__ | dictsort  %}
                         {% if param not in ['user_id', '_sa_instance_state'] %}
                         <tr> <td> {{ param }} </td> <td> {{ val }} </td> </tr>
                         {% endif %}
