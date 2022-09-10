@@ -22,10 +22,10 @@ class StarForm(FlaskForm):
     log_g_error_lower = FloatField('log_g_error_lower', validators=[Optional(strip_whitespace=True)])
     log_g_ref = TextAreaField('log_g_ref', validators=[Optional(strip_whitespace=True)])
 
-    teff = FloatField('T_effective (K)', validators=[Optional(strip_whitespace=True)])
-    teff_error_upper = FloatField('T_effective_error_upper', validators=[Optional(strip_whitespace=True)])
-    teff_error_lower = FloatField('T_effective_error_lower', validators=[Optional(strip_whitespace=True)])
-    teff_ref = TextAreaField('T_effective_ref', validators=[Optional(strip_whitespace=True)])
+    T_eff = FloatField('T_effective (K)', validators=[Optional(strip_whitespace=True)])
+    T_eff_error_upper = FloatField('T_effective_error_upper', validators=[Optional(strip_whitespace=True)])
+    T_eff_error_lower = FloatField('T_effective_error_lower', validators=[Optional(strip_whitespace=True)])
+    T_eff_ref = TextAreaField('T_effective_ref', validators=[Optional(strip_whitespace=True)])
 
     Fe_H = FloatField('[Fe/H] (dex)', validators=[Optional(strip_whitespace=True)])
     Fe_H_error_upper = FloatField('[Fe/H]_error_upper', validators=[Optional(strip_whitespace=True)])

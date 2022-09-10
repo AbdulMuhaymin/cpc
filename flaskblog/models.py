@@ -136,10 +136,10 @@ class Star(db.Model):
     vsini_error_lower = db.Column(db.Float)
     vsini_ref = db.Column(db.Text)
     
-    Prot= db.Column(db.Float)
-    Prot_err_upper = db.Column(db.Float)
-    Prot_err_lower = db.Column(db.Float)
-    Prot_ref = db.Column(db.Text)
+    p_rot= db.Column(db.Float)
+    p_rot_err_upper = db.Column(db.Float)
+    p_rot_err_lower = db.Column(db.Float)
+    p_rot_ref = db.Column(db.Text)
     
     notes = db.Column(db.Text)
 

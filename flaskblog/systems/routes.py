@@ -22,7 +22,7 @@ def new_system():
         db.session.commit()
         flash('The system entry has been successfully added for ', 'success')
         return redirect(url_for('systems.system', system_id=system.id))
-    return render_template('system_new.html', title="Add a system entry", form=form, legend='Add New System')
+    return render_template('system_new.html', title="New System", form=form, legend='Add New System')
 
 @systems_bp.route("/system/<int:system_id>", methods=['GET', 'POST'])
 def system(system_id):
@@ -41,7 +41,7 @@ def update_system(system_id):
         return redirect(url_for('systems.system', system_id=system.id))
     elif request.method == 'GET':
         form.populate_obj(system)  
-    return render_template('system_new.html', title="Update a system entry", form=form, legend='Update System')
+    return render_template('system_new.html', title="Update System", form=form, legend='Update System')
 
 @systems_bp.route("/systems/<int:system_id>/delete", methods=['POST'])
 @login_required
