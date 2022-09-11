@@ -8,7 +8,7 @@ class SystemForm(FlaskForm):
     gaia_id = StringField('Gaia Designation', validators=[Optional(strip_whitespace=True)])
 
     sp_type = StringField('Spectral Type', validators=[Optional(strip_whitespace=True)])
-    sp_type_ref = TextAreaField('SP_type_ref', default='', validators=[Optional(strip_whitespace=True)])
+    sp_type_ref = TextAreaField('Spectral Type Ref.', default='', validators=[Optional(strip_whitespace=True)])
 
     ra = FloatField('RA (deg)', validators=[Optional(strip_whitespace=True)])
     ra_error_upper = FloatField('RA_error_upper', validators=[Optional(strip_whitespace=True)])
@@ -16,14 +16,14 @@ class SystemForm(FlaskForm):
     dec = FloatField('DEC (deg)', validators=[Optional(strip_whitespace=True)])
     dec_error_upper = FloatField('DEC_error_upper', validators=[Optional(strip_whitespace=True)])
     dec_error_lower = FloatField('DEC_error_lower', validators=[Optional(strip_whitespace=True)])
-    ra_dec_ref = TextAreaField('RA_DEC_ref', default='', validators=[Optional(strip_whitespace=True)])
+    ra_dec_ref = TextAreaField('RA DEC Ref.', default='', validators=[Optional(strip_whitespace=True)])
 
     parallax = FloatField('Parallax (mas)', validators=[Optional(strip_whitespace=True)])
     parallax_error = FloatField('Parallax_error', validators=[Optional(strip_whitespace=True)])
     distance = FloatField('Distance (pc)', validators=[Optional(strip_whitespace=True)])
     distance_error_upper = FloatField('Distance_error_upper', validators=[Optional(strip_whitespace=True)])
     distance_error_lower = FloatField('Distance_error_lower', validators=[Optional(strip_whitespace=True)])
-    distance_ref = TextAreaField('Distance_ref', default='', validators=[Optional(strip_whitespace=True)])
+    distance_ref = TextAreaField('Distance Ref.', default='', validators=[Optional(strip_whitespace=True)])
 
     distance_gspphot = FloatField('Distance_gspphot (pc)', validators=[Optional(strip_whitespace=True)])
     distance_gspphot_upper = FloatField('Distance_gspphot_error_upper', validators=[Optional(strip_whitespace=True)])
@@ -49,14 +49,14 @@ class SystemForm(FlaskForm):
     a_ref = TextAreaField('a_ref', default='', validators=[Optional(strip_whitespace=True)])
 
     incl = FloatField('Inclination (deg)', validators=[Optional(strip_whitespace=True)])
-    incl_error_upper = FloatField('incl_error_upper', validators=[Optional(strip_whitespace=True)])
-    incl_error_lower = FloatField('incl_error_lower', validators=[Optional(strip_whitespace=True)])
-    incl_ref = TextAreaField('incl_ref', default='', validators=[Optional(strip_whitespace=True)])
+    incl_error_upper = FloatField('Inclination_error_upper', validators=[Optional(strip_whitespace=True)])
+    incl_error_lower = FloatField('Inclination_error_lower', validators=[Optional(strip_whitespace=True)])
+    incl_ref = TextAreaField('Inclination Ref.', default='', validators=[Optional(strip_whitespace=True)])
 
     e = FloatField('Eccentricity', validators=[Optional(strip_whitespace=True)])
-    e_error_upper = FloatField('e_error_upper', validators=[Optional(strip_whitespace=True)])
-    e_error_lower = FloatField('e_error_lower', validators=[Optional(strip_whitespace=True)])
-    e_ref = TextAreaField('e_ref', default='', validators=[Optional(strip_whitespace=True)])
+    e_error_upper = FloatField('Eccentricity_error_upper', validators=[Optional(strip_whitespace=True)])
+    e_error_lower = FloatField('Eccentricity_error_lower', validators=[Optional(strip_whitespace=True)])
+    e_ref = TextAreaField('Eccentricity Ref.', default='', validators=[Optional(strip_whitespace=True)])
     
     w = FloatField('Argument of Periastron (deg)', validators=[Optional(strip_whitespace=True)])
     w_error_upper = FloatField('w_error_upper', validators=[Optional(strip_whitespace=True)])
@@ -206,10 +206,8 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign in')
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
 

@@ -20,7 +20,7 @@
                 <tbody>
                     {% for system in systems %}
                     <tr> 
-                        <td> <a href="{{ url_for('systems.system', system_id=system.id) }}"> {{ system.system_name }} </a> </td> 
+                        <td> <a href="{{ url_for('system', system_id=system.id) }}"> {{ system.system_name }} </a> </td> 
                         <td> {{ system.gaia_id }} </td>
                         <td> {{ system.sp_type }} </td>
                         <td> {{ system.sp_type_ref }} </td>
@@ -100,8 +100,26 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'colvis',
+                    collectionLayout: 'fixed columns',
+                    collectionTitle: 'Column visibility control'
+                },
+                {
+                    extend: 'csv',
+                    text: 'Download as CSV',
+                    exportOptions: {
+                        modifier: {
+                            search: 'none'
+                        }
+                    }
+                }
+            ],
             scrollX: true,
-            fixedHeader: true,
+            scrollY: '55vh',
+            scrollCollapse: true,
             fixedColumns: true
         });
     });

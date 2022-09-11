@@ -12,11 +12,8 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), default='default.png', nullable=False) 
     password = db.Column(db.String(60), nullable = False)
 
-    stars = db.relationship('Star', backref='author', lazy=True)
-    planets = db.relationship('Planet', backref='author', lazy=True)
-
     def __repr__(self):
-        return f"User('{self.username}', {self.email}', {self.image_file}')"
+        return f"This is an user with username='{self.username}', email='{self.email}' and password='{self.password}'"
 
 class System(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -89,7 +86,7 @@ class System(db.Model):
     notes = db.Column(db.Text)
 
     def __repr__(self):
-        return f"System - '{self.system_name}')"
+        return f"System - '{self.system_name}'"
 
 class Star(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -140,10 +137,8 @@ class Star(db.Model):
     
     notes = db.Column(db.Text)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
     def __repr__(self):
-        return f"System - '{self.star_name}')"
+        return f"Star - '{self.star_name}'"
 
 class Planet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -200,9 +195,7 @@ class Planet(db.Model):
     mean_anomaly_ref = db.Column(db.Text)
     
     notes = db.Column(db.Text)
-
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    
     def __repr__(self):
-        return f"System - '{self.planet_name}')"
+        return f"Planet - '{self.planet_name}'"
 

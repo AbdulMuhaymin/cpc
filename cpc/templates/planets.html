@@ -7,16 +7,16 @@
             <table id="example">
                 <thead>
                     <tr>
-                        <th scope="col"> planet </th>
-                        <th scope="col"> link </th>
+                        <th scope="col"> Col1 </th>
+                        <th scope="col"> Col2 </th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {% for planet in planets %}
+                    {% for star in stars %}
                     <tr> 
-                        <td> {{ planet.planet_name }} </td> 
-                        <td> <a href="{{ url_for('planets.planet', planet_id=planet.id) }}"> {{ planet.id }} </a> </td>
+                        <td> {{ star.star_name }} </td> 
+                        <td> <a href="{{ url_for('planet', planet_id=planet.id) }}"> {{ planet.id }} </a> </td>
                     </tr>
                     {% endfor %}
                 </tbody>

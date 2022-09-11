@@ -13,6 +13,9 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
+# Following code block is for when we need to manually include data from
+# csv files using sqlite. We don't need to bother about these.
+#
 # import pandas as pd
 # import sqlalchemy
 # df = pd.read_csv('data/systems.csv')

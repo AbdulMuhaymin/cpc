@@ -7,8 +7,8 @@
             <table id="example">
                 <thead>
                     <tr>
-                        <th scope="col"> System </th>
-                        <th scope="col"> link </th>
+                        <th scope="col"> Col1 </th>
+                        <th scope="col"> Col2 </th>
                     </tr>
                 </thead>
 
@@ -16,7 +16,7 @@
                     {% for star in stars %}
                     <tr> 
                         <td> {{ star.star_name }} </td> 
-                        <td> <a href="{{ url_for('stars.star', star_id=star.id) }}"> {{ star.id }} </a> </td>
+                        <td> <a href="{{ url_for('star', star_id=star.id) }}"> {{ star.id }} </a> </td>
                     </tr>
                     {% endfor %}
                 </tbody>
