@@ -43,8 +43,7 @@ def systems():
 def new_system():
     form = SystemForm()
     if form.validate_on_submit():
-        system = System(**{k: v for k, v in form.data.items() if k not in ['csrf_token', 'submit']}, 
-            author=current_user)
+        system = System(**{k: v for k, v in form.data.items() if k not in ['csrf_token', 'submit']})
         db.session.add(system)
         db.session.commit()
         flash('The system entry has been successfully added for ', 'success')
@@ -95,8 +94,7 @@ def stars():
 def new_star():
     form = StarForm()
     if form.validate_on_submit():
-        star = Star(**{k: v for k, v in form.data.items() if k not in ['csrf_token', 'submit']}, 
-            author=current_user)
+        star = Star(**{k: v for k, v in form.data.items() if k not in ['csrf_token', 'submit']})
         db.session.add(star)
         db.session.commit()
         flash('The star entry has been successfully added for ', 'success')
@@ -146,8 +144,7 @@ def planets():
 def new_planet():
     form = PlanetForm()
     if form.validate_on_submit():
-        planet = Planet(**{k: v for k, v in form.data.items() if k not in ['csrf_token', 'submit']}, 
-            author=current_user)
+        planet = Planet(**{k: v for k, v in form.data.items() if k not in ['csrf_token', 'submit']})
         db.session.add(planet)
         db.session.commit()
         flash('The planet entry has been successfully added for ', 'success')
